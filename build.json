@@ -1,0 +1,11 @@
+{
+  "vite": false,
+  "plugins": [
+    [
+      "build-plugin-ignore-style",
+      {
+        "libraryName": "antd"
+      }
+    ]
+  ]
+}

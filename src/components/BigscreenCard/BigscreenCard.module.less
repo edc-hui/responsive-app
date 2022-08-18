@@ -1,0 +1,28 @@
+.BigscreenCard {
+  width: 100%;
+  background-color: rgba(0, 0, 0, .3);
+  backdrop-filter: blur(20px);
+  padding: 5px 10px;
+  > .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: '';
+      width: 4px;
+      height: 20px;
+      background: url("./Frame 330.svg") no-repeat;
+      background-size: 100% 100%;
+      display: inline-block;
+    }
+
+    > .title {
+      color: #2BFFE6;
+      margin-left: 5px;
+    }
+  }
+
+  > .body {
+  }
+}
