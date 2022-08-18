@@ -8,6 +8,13 @@ export default function BasicLayout({ children }) {
   const domRef = useRef<any>();
   useEffect(() => {
     if (commonState.responsiveMethod === 'zoom') {
+      // 消除scale的配置
+      const wrapperDOM: HTMLDivElement = document.querySelector('#ice-container')!;
+      wrapperDOM.style.transform = 'unset';
+      wrapperDOM.style.transformOrigin = 'unset';
+      wrapperDOM.style.margin = 'unset';
+      wrapperDOM.style.width = '100%';
+      wrapperDOM.style.height = '100%';
       calculateCssZoom();
       window.addEventListener('resize', calculateCssZoom);
     }
