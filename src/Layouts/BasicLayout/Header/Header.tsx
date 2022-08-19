@@ -38,6 +38,7 @@ const Header = () => {
       <div className={styles.name}>自适应的大屏可视化DEMO</div>
       <div className={styles.time}>
         <Select value={commonState.responsiveMethod} onChange={onChange} getPopupContainer={() => domRef.current}>
+        {/*<Select value={commonState.responsiveMethod} onChange={onChange}>*/}
           <Option value="zoom">zoom</Option>
           <Option value="scale">scale</Option>
         </Select>

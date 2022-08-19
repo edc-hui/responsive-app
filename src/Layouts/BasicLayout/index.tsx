@@ -19,11 +19,14 @@ export default function BasicLayout({ children }) {
       window.addEventListener('resize', calculateCssZoom);
     }
     if (commonState.responsiveMethod === 'scale') {
+      // calculateCssScaleKeepRate();
+      // window.addEventListener('resize', calculateCssScaleKeepRate);
       calculateCssScale();
       window.addEventListener('resize', calculateCssScale);
     }
     return () => {
       window.removeEventListener('resize', calculateCssZoom);
+      // window.removeEventListener('resize', calculateCssScaleKeepRate);
       window.removeEventListener('resize', calculateCssScale);
     };
   }, [commonState.responsiveMethod]);
@@ -46,9 +49,30 @@ export default function BasicLayout({ children }) {
   };
 
   /**
-   * 计算CSS scale
+   * 计算CSS scale  --- 不保持比例  会压缩页面
    */
   const calculateCssScale = () => {
+    const uiWidth = 1920;
+    const uiHeight = 1080;
+    const bodyDOM = document.getElementsByTagName('body')[0];
+    const gaodeDOM = document.querySelector('#gaode-map');
+
+    const scaleX = window.innerWidth / uiWidth;
+    const scaleY = window.innerHeight / uiHeight;
+    // const offsetX = (window.innerWidth - uiWidth) / (2 * scaleX);
+    // const offsetY = (window.innerHeight - uiHeight) / (2 * scaleX);
+    bodyDOM.style.width = `${uiWidth}px`;
+    bodyDOM.style.height = `${uiHeight}px`;
+    // bodyDOM.style.transform = `scale(${scaleX},${scaleX}) translate(${offsetX}px,${offsetY}px)`;
+    bodyDOM.style.transform = `scale(${scaleX},${scaleY})`;
+    bodyDOM.style.transformOrigin = 'left top';
+    gaodeDOM.style.transform = `scale(${1 / scaleX},${1 / scaleY})`;
+  };
+
+  /**
+   * 计算CSS scale --- 保持比例
+   */
+  const calculateCssScaleKeepRate = () => {
     const uiWidth = 1920;
     const uiHeight = 1080;
     const wrapperDOM: HTMLDivElement = document.querySelector('#ice-container')!;
